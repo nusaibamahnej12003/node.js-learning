@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f8fc" />
+    <title>Classroom — Tutor management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#" aria-label="Classroom home">
+          <span class="brand-mark">c</span>
+          <span>classroom<span class="brand-period">.</span></span>
+        </a>
+        <div class="workspace-label">WORKSPACE</div>
+        <nav class="main-nav" aria-label="Main navigation">
+          <button class="nav-link active" data-view="dashboard"><span class="nav-icon">⌂</span>Overview</button>
+          <button class="nav-link" data-view="lessons"><span class="nav-icon">▦</span>Lessons</button>
+          <button class="nav-link" data-view="students"><span class="nav-icon">♙</span>Students</button>
+          <button class="nav-link" data-view="tutors"><span class="nav-icon">♧</span>Tutors</button>
+          <button class="nav-link" data-view="payments"><span class="nav-icon">＄</span>Payments</button>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="tip-card">
+            <span class="tip-spark">✦</span>
+            <strong>A little progress<br />goes a long way.</strong>
+            <p>Keep your classes organized and your students growing.</p>
+          </div>
+          <div class="profile">
+            <div class="avatar avatar-purple">A</div>
+            <div class="profile-copy"><strong>Admin</strong><span>Workspace owner</span></div>
+            <span class="profile-menu">···</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="breadcrumbs"><span>Workspace</span><span class="crumb-slash">/</span><strong id="breadcrumb-current">Overview</strong></div>
+          <div class="topbar-actions">
+            <label class="search-box">
+              <span aria-hidden="true">⌕</span>
+              <input id="global-search" type="search" placeholder="Search anything..." autocomplete="off" />
+              <kbd>⌘ K</kbd>
+            </label>
+            <button class="icon-button notification-button" aria-label="Notifications">♧<i></i></button>
+            <div class="avatar avatar-purple top-avatar">A</div>
+          </div>
+        </header>
+
+        <div class="page-content">
+          <section class="view active" id="view-dashboard">
+            <div class="page-heading dashboard-heading">
+              <div><p class="eyebrow" id="today-label">YOUR CLASSROOM</p><h1>Good morning, Admin <span class="wave">✦</span></h1><p class="heading-subtitle">Here’s what’s happening with your classes today.</p></div>
+              <button class="button button-primary" data-action="new-lesson"><span>＋</span> Schedule a lesson</button>
+            </div>
+
+            <div class="stats-grid">
+              <article class="stat-card">
+                <div class="stat-top"><span class="stat-icon lavender">♙</span><span class="stat-label">Total students</span><span class="stat-more">···</span></div>
+                <div class="stat-value" id="stat-students">0</div><div class="stat-foot"><span class="stat-note">Across all your classes</span></div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-top"><span class="stat-icon mint">♧</span><span class="stat-label">Active tutors</span><span class="stat-more">···</span></div>
+                <div class="stat-value" id="stat-tutors">0</div><div class="stat-foot"><span class="stat-note">Ready to teach</span></div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-top"><span class="stat-icon peach">▦</span><span class="stat-label">Upcoming lessons</span><span class="stat-more">···</span></div>
+                <div class="stat-value" id="stat-lessons">0</div><div class="stat-foot"><span class="stat-note">Scheduled from today</span></div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-top"><span class="stat-icon blue">＄</span><span class="stat-label">Payments received</span><span class="stat-more">···</span></div>
+                <div class="stat-value" id="stat-revenue">$0</div><div class="stat-foot"><span class="stat-note">Total marked as paid</span></div>
+              </article>
+            </div>
+
+            <div class="dashboard-grid">
+              <section class="panel schedule-panel">
+                <div class="panel-heading"><div><h2>Upcoming lessons</h2><p>Your next classes at a glance</p></div><button class="text-button" data-view="lessons">View schedule <span>→</span></button></div>
+                <div id="dashboard-lessons" class="dashboard-lessons"></div>
+              </section>
+              <section class="panel quick-panel">
+                <div class="panel-heading"><div><h2>Quick actions</h2><p>Keep things moving</p></div></div>
+                <button class="quick-action" data-action="new-student"><span class="quick-icon lavender">♙</span><span><strong>Add a student</strong><small>Grow your classroom</small></span><b>→</b></button>
+                <button class="quick-action" data-action="new-tutor"><span class="quick-icon mint">♧</span><span><strong>Add a tutor</strong><small>Bring on a new teacher</small></span><b>→</b></button>
+                <button class="quick-action" data-action="new-payment"><span class="quick-icon blue">＄</span><span><strong>Record a payment</strong><small>Update your finances</small></span><b>→</b></button>
+                <div class="progress-card"><div class="progress-top"><span>Attendance this month</span><strong id="attendance-rate">—</strong></div><div class="progress-track"><span id="attendance-bar"></span></div><small>Based on recorded lesson attendance</small></div>
+              </section>
+            </div>
+          </section>
+
+          <section class="view" id="view-lessons">
+            <div class="page-heading"><div><p class="eyebrow">KEEP EVERY CLASS ON TRACK</p><h1>Lessons</h1><p class="heading-subtitle">Schedule sessions and keep track of student progress.</p></div><button class="button button-primary" data-action="new-lesson"><span>＋</span> Add lesson</button></div>
+            <section class="panel table-panel"><div class="panel-heading table-heading"><div><h2>All lessons</h2><p id="lessons-subtitle">Your class schedule</p></div><select class="filter-select" id="lesson-filter" aria-label="Filter lessons"><option value="all">All lessons</option><option value="scheduled">Scheduled</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option></select></div><div id="lessons-table"></div></section>
+          </section>
+
+          <section class="view" id="view-students">
+            <div class="page-heading"><div><p class="eyebrow">YOUR LEARNING COMMUNITY</p><h1>Students</h1><p class="heading-subtitle">Get to know every learner and follow their progress.</p></div><button class="button button-primary" data-action="new-student"><span>＋</span> Add student</button></div>
+            <section class="panel table-panel"><div class="panel-heading table-heading"><div><h2>All students</h2><p>Student and guardian contact details</p></div></div><div id="students-table"></div></section>
+          </section>
+
+          <section class="view" id="view-tutors">
+            <div class="page-heading"><div><p class="eyebrow">THE PEOPLE WHO MAKE IT HAPPEN</p><h1>Tutors</h1><p class="heading-subtitle">Manage your teaching team and their specialties.</p></div><button class="button button-primary" data-action="new-tutor"><span>＋</span> Add tutor</button></div>
+            <section class="panel table-panel"><div class="panel-heading table-heading"><div><h2>All tutors</h2><p>Teaching team and subject areas</p></div></div><div id="tutors-table"></div></section>
+          </section>
+
+          <section class="view" id="view-payments">
+            <div class="page-heading"><div><p class="eyebrow">SIMPLE, CLEAR RECORDS</p><h1>Payments</h1><p class="heading-subtitle">Keep track of paid and outstanding tuition.</p></div><button class="button button-primary" data-action="new-payment"><span>＋</span> Record payment</button></div>
+            <section class="panel table-panel"><div class="panel-heading table-heading"><div><h2>Payment history</h2><p>Tuition records for your students</p></div></div><div id="payments-table"></div></section>
+          </section>
+        </div>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <div class="modal-backdrop" id="modal-backdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-heading"><div><p class="eyebrow">CLASSROOM RECORD</p><h2 id="modal-title">Add a record</h2></div><button class="icon-button close-modal" aria-label="Close dialog">×</button></div><form id="record-form"><div class="form-fields" id="form-fields"></div><p class="form-error" id="form-error" role="alert"></p><div class="modal-actions"><button type="button" class="button button-secondary close-modal">Cancel</button><button type="submit" class="button button-primary" id="save-button">Save record</button></div></form></section></div>
+    <script src="/app.js"></script>
+  </body>
+</html>
